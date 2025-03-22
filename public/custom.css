@@ -1,0 +1,137 @@
+html,body{
+    background: #111827;
+}
+.topbar-left .bg-logo {
+    background-color: #1f2937;
+}
+.navbar-custom {
+    background-color: #1f2937;
+}
+#sidebar-menu {
+    background-color: #1f2937;
+    padding-bottom: 230px;
+    width: 100%;
+}
+
+.side-menu
+{
+    background: #1f2937;
+}
+
+#sidebar-menu > ul > li > a.active {
+    color: #fff;
+    background-color: rgba(96, 93, 175, 0.15);
+}
+#sidebar-menu > ul > li > a.active i {
+    color: #fff;
+}
+#sidebar-menu > ul > li > a {
+    color: #ffffff;
+    display: block;
+    padding: 16px 25px;
+    margin: 3px 0;
+    /* background-color: #ffffff; */
+    background-color: transparent !important;
+}
+#sidebar-menu > ul > li > a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+#sidebar-menu > ul > li > a i {
+    color: #ffffff;
+}
+#sidebar-menu > ul > li > a:hover i {
+    color: #ffffff;
+}
+
+.card .card-header {
+    background-color: #1f2937;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom:2px  solid #ffff;
+}
+
+.card .card-header h3{
+    color: #fff;
+}
+
+.card .card-body {
+    background-color: #1f2937;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    background: #111827 !important;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color:  #fff !important;
+
+    border: 1px solid #4f46e5 !important;
+    /* border-image: linear-gradient(120deg, #f8c955 0%, #f5604a 100%) !important; */
+    border-image-slice: 1 !important;
+}
+
+.form-control:focus {
+    border: 3px solid #4f46e5 !important;
+    /* border-image: linear-gradient(120deg, #f8c955 0%, #f5604a 100%) !important; */
+    /* border-image-slice: 1 !important; */
+    caret-color: #4f46e5 !important;
+}
+
+.add-button, .submit-button {
+    padding: 10px 30px !important;
+    font-size: 20px !important;
+}
+
+.button-menu-mobile {
+    background-color: #1f2937;
+    font-size: 28px;
+    color: #ffffff !important;
+    width: 42px;
+    border-radius: 3px;
+    border: none;
+    line-height: 70px;
+}
+
+
+.dropify-wrapper {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #777;
+    background-color: #FFF;
+    background-image: none;
+    text-align: center;
+    border: 2px solid #E5E5E5;
+    -webkit-transition: border-color .15s linear;
+    transition: border-color .15s linear;
+    border: 1px solid #4f46e5;
+}
+
+.dropify-wrapper:hover {
+    border: 3px solid #4f46e5;
+}
+
+button.dropify-clear {
+    background: linear-gradient(120deg, #f8c955 0%, #f5604a 100%) !important;
+    color: #ffffff;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(248, 201, 85, 0.5);
+    border: 1px solid #f7c13d;
+    box-shadow: 0 2px 6px 0 rgba(248, 201, 85, 0.5);
+}
