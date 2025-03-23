@@ -11,6 +11,9 @@
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
 
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.18/dist/sweetalert2.all.min.js"></script>
+
 <script src="{{ asset('assets/plugins/chart.js/chart.min.js') }}"></script>
 
 @if(Route::currentRouteName() == 'dashboard')

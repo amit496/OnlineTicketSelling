@@ -38,7 +38,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <label for="" class="text-white">Category Name(EN)</label>
-                                    <input class="form-control" type="text" id="category-name-en" name="category_name_en" value="{{ old('category_name_en', $data->en_name) }}">
+                                    <input class="form-control" type="text" id="category-name-en" name="category_name_en" value="{{ old('category_name_en', $data->updated_en_name ?? $data->en_name ) }}">
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-3">

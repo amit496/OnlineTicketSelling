@@ -100,7 +100,7 @@ class CategoryController extends Controller
             return redirect()->back()->with('error', 'Category not found.');
         }
 
-        $data->en_name = $request->category_name_en;
+        $data->updated_en_name = $request->category_name_en;
         $data->cn_name = $request->category_name_cn;
 
         if ($data->save()) {
