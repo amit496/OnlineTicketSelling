@@ -11,6 +11,9 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class CategoryController extends Controller
 {
+    private const INVALID_UUID_MESSAGE = 'Invalid UUID.';
+    private const CATEGORY_NOT_FOUND_MESSAGE = 'Category not found.';
+
     /**
      * Display a listing of the resource.
      */
@@ -47,7 +50,7 @@ class CategoryController extends Controller
                 $data->save();
             }
 
-            return redirect()->back()->with('success', 'Category record successfully saved.');
+            return redirect()->route('category.index')->with('success', 'Category record successfully saved.');
         } else {
             return redirect()->back()->with('error', 'Category record could not be saved.');
         }
@@ -60,7 +63,25 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $error = null;
+        $data = null;
+
+        try {
+            $decryptedUuid = Crypt::decrypt($id);
+            $data = Category::where('uuid', $decryptedUuid)->first();
+
+            if (!$data) {
+                $error = self::CATEGORY_NOT_FOUND_MESSAGE;
+            }
+        } catch (DecryptException $e) {
+            $error = self::INVALID_UUID_MESSAGE;
+        }
+
+        if ($error) {
+            return redirect()->back()->with('error', $error);
+        }
+
+        return view('admin.category.details', compact('data'));
     }
 
     /**
@@ -71,13 +92,13 @@ class CategoryController extends Controller
         try {
             $decryptedUuid = Crypt::decrypt($id);
         } catch (DecryptException $e) {
-            return redirect()->back()->with('error', 'Invalid UUID.');
+            return redirect()->back()->with('error', self::INVALID_UUID_MESSAGE);
         }
 
         $data = Category::where('uuid', $decryptedUuid)->first();
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Category not found.');
+            return redirect()->back()->with('error', self::CATEGORY_NOT_FOUND_MESSAGE);
         }
 
         return view('admin.category.edit', compact('data'));
@@ -91,32 +112,33 @@ class CategoryController extends Controller
         try {
             $decryptedUuid = Crypt::decrypt($id);
         } catch (DecryptException $e) {
-            return redirect()->back()->with('error', 'Invalid UUID.');
+            $message = self::INVALID_UUID_MESSAGE;
+            return redirect()->route($redirectRoute)->with('error', $message);
         }
 
         $data = Category::where('uuid', $decryptedUuid)->first();
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Category not found.');
-        }
-
-        $data->updated_en_name = $request->category_name_en;
-        $data->cn_name = $request->category_name_cn;
-
-        if ($data->save()) {
-
-            $imagePath = UploadImage($request, 'image', $data->id, $data->image, 'category');
-
-            if ($imagePath) {
-                $data->image = $imagePath;
-                $data->update();
-            }
-
-            return redirect()->back()->with('success', 'Category record successfully saved.');
+            $message = self::CATEGORY_NOT_FOUND_MESSAGE;
         } else {
-            return redirect()->back()->with('error', 'Category record could not be saved.');
+            $data->updated_en_name = $request->category_name_en;
+            $data->cn_name = $request->category_name_cn;
+
+            if ($data->save()) {
+                $imagePath = UploadImage($request, 'image', $data->id, $data->image, 'category');
+
+                if ($imagePath) {
+                    $data->image = $imagePath;
+                    $data->update();
+                }
+                $message = 'Category record successfully updated.';
+                return redirect()->route('category.index')->with('success', $message);
+            } else {
+                $message = 'Category record could not be updated.';
+            }
         }
 
+        return redirect()->back()->with('error', $message);
     }
 
     /**
@@ -124,6 +146,55 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $decryptedUuid = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            $message = self::INVALID_UUID_MESSAGE;
+            return redirect()->back()->with('error', $message);
+        }
+
+        $data = Category::where('uuid', $decryptedUuid)->first();
+
+        if (!$data) {
+            $message = self::CATEGORY_NOT_FOUND_MESSAGE;
+        } else {
+            if ($data->delete()) {
+                DeleteImage($data->image);
+                $message = 'Category record successfully deleted.';
+                return redirect()->route('category.index')->with('success', $message);
+            } else {
+                $message = 'Category record could not be deleted.';
+            }
+        }
+
+        return redirect()->back()->with('error', $message);
     }
+
+    public function status(string $id){
+        $message = '';
+        $statusType = 'error';
+
+        try {
+            $decryptedUuid = Crypt::decrypt($id);
+            $data = Category::where('uuid', $decryptedUuid)->first();
+
+            if (!$data) {
+                $message = 'Category not found.';
+            } else {
+                $status = UpdateStatus($data);
+                if ($status) {
+                    $message = 'Category status successfully updated.';
+                    $statusType = 'success';
+                } else {
+                    $message = 'Category status could not be updated.';
+                }
+            }
+        } catch (DecryptException $e) {
+            $message = 'Invalid UUID.';
+        }
+
+        return redirect()->back()->with($statusType, $message);
+    }
+
+
 }

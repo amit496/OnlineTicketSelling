@@ -1,6 +1,7 @@
 @extends('admin.layouts.index')
 @section('content')
 <div class="container-fluid">
+
     <div class="row">
         <div class="col-sm-12">
             <div class="page-title-box">
@@ -10,7 +11,7 @@
                         <li class="breadcrumb-item active">Category</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Category</h4>
+                <h4 class="page-title" style="color: #8c9ea9;">Category</h4>
             </div>
         </div>
     </div>
@@ -19,19 +20,22 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3>Category List</h3>
+                    <h5>Category List</h5>
                     <a href="{{ route('category.create') }}" class="btn btn-gradient-warning waves-effect waves-light">Add Category</a>
                 </div>
 
+                {!! SuccessErrorMessage() !!}
+
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-dark mb-0">
+                        <table class="table table-striped table-dark mb-0 table-bordered">
                             <thead class="bg-dark">
                                 <tr>
                                     <th>S No</th>
                                     <th>Image</th>
                                     <th>Category Name (EN)</th>
                                     <th>Category Name (CN)</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -44,12 +48,16 @@
                                         </td>
                                         <td>{{ $category->en_name }}</td>
                                         <td>{{ $category->cn_name }}</td>
+                                        <td>{!! Status($category->status, route('category.status', Crypt::encrypt($category->uuid))) !!}</td>
                                         <td>
                                             <a href="{{ route('category.edit', Crypt::encrypt($category->uuid)) }}" class="btn btn-sm btn-success">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                            <a href="{{ route('category.show', Crypt::encrypt($category->uuid)) }}" class="btn btn-sm btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
 
-                                            <form action="#" method="POST" class="d-inline">
+                                            <form action="{{ route('category.destroy', Crypt::encrypt($category->uuid)) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">

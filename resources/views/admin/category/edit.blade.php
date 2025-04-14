@@ -12,7 +12,7 @@
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Category</h4>
+                    <h4 class="page-title" style="color: #8c9ea9;">Category</h4>
                 </div>
             </div>
         </div>
@@ -25,13 +25,12 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h3>Category</h3>
+                                <h5>Category</h5>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        {{-- {{dd($data)}} --}}
                         <form action="{{ route('category.update', ['uuid' =>Crypt::encrypt($data->uuid)]) }}" method="post" enctype="multipart/form-data">
                             @csrf
 
@@ -49,7 +48,7 @@
                             </div>
                             <div class="row justify-content-center mt-3">
                                 <div class="col-lg-12">
-                                    <label class="mt-3">Category Image</label>
+                                    <label for="" class="text-white">Category Image</label>
                                     <input type="file" class="dropify" name="image" data-default-file="{{ isset($data) && $data->image ? asset($data->image) : asset('placeholder.png') }}">
                                 </div>
                             </div>

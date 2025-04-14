@@ -26,3 +26,8 @@
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
 <script src="{{ asset('custom.js') }}"></script>
+
+{{-- Select 2 --}}
+<script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
+
+{{-- <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script> --}}

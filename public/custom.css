@@ -1,3 +1,12 @@
+
+body > .skiptranslate {
+    display: none !important;
+}
+
+body.fixed-left {
+    top: 0px !important;
+}
+
 html,body{
     background: #111827;
 }
@@ -51,8 +60,9 @@ html,body{
     border-bottom:2px  solid #ffff;
 }
 
-.card .card-header h3{
+.card .card-header h5{
     color: #fff;
+    letter-spacing: 1px;
 }
 
 .card .card-body {
@@ -88,8 +98,12 @@ html,body{
 }
 
 .add-button, .submit-button {
-    padding: 10px 30px !important;
-    font-size: 20px !important;
+    padding: 8px 25px !important;
+    font-size: 17px !important;
+}
+
+.add-button:hover, .submit-button:hover {
+    color: #111827;
 }
 
 .button-menu-mobile {
@@ -134,4 +148,12 @@ button.dropify-clear {
     -webkit-box-shadow: 0 2px 6px 0 rgba(248, 201, 85, 0.5);
     border: 1px solid #f7c13d;
     box-shadow: 0 2px 6px 0 rgba(248, 201, 85, 0.5);
+}
+
+.skiptranslate > span {
+    display: none !important;
+}
+
+body:contains('Powered by') {
+    display: none;
 }
