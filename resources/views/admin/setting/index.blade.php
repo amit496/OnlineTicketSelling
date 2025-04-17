@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-10 text-right">
                                         <h5 class="mt-0 mb-1 text-warning">62</h5>
-                                        <p class="mb-0 font-12 text-info">API User Details</p>
+                                        <p class="mb-0 font-12"><a href="{{ route('apiuser.index')}}" class="text-info">API User Details</a></p>
                                     </div>
                                 </div>
                             </div>

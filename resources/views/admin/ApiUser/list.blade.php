@@ -2,14 +2,28 @@
 @section('content')
 <div class="container-fluid">
 
-    @include('admin.Category.breadcrumb')
+    {{-- <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="btn-group float-right">
+                    <ol class="breadcrumb hide-phone p-0 m-0">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Api User</li>
+                    </ol>
+                </div>
+                <h4 class="page-title" style="color: #8c9ea9;">Api User</h4>
+            </div>
+        </div>
+    </div> --}}
+
+    @include('admin.ApiUser.breadcrumb')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5>List</h5>
-                    <a href="{{ route('category.create') }}" class="btn btn-gradient-warning waves-effect waves-light">Add Category</a>
+                    <h5>Api User List</h5>
+                    <a href="{{ route('apiuser.create') }}" class="btn btn-gradient-warning waves-effect waves-light">Add Api User</a>
                 </div>
 
                 {!! SuccessErrorMessage() !!}
@@ -20,26 +34,21 @@
                             <thead class="bg-dark">
                                 <tr>
                                     <th>S No</th>
-                                    <th>Image</th>
-                                    <th>Category Name (EN)</th>
-                                    <th>Category Name (CN)</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Url</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($data as $index => $category)
+                                @forelse ($apiUsers as $index => $value)
                                     <tr>
-                                        <td>{{ $data->firstItem() + $index }}</td>
+                                        <td>{{ $apiUsers->firstItem() + $index }}</td>
+                                        <td>{{$value->name}}</td>
+                                        <td>{{$value->email}}</td>
+                                        <td>{{$value->url}}</td>
+                                        <td>{!! Status($value->status, route('category.status', Crypt::encrypt($value->uuid))) !!}</td>
                                         <td>
-                                            <img src="{{ asset($category->image ?? 'placeholder.png') }}" alt="Category" class="rounded-circle thumb-sm">
-                                        </td>
-                                        <td>{{ $category->en_name }}</td>
-                                        <td>{{ $category->cn_name }}</td>
-
-                                        <td>
-
-                                            {!! status($category->status, route('category.status', Crypt::encrypt($category->uuid))) !!}
-
                                             <a href="{{ route('category.edit', Crypt::encrypt($category->uuid)) }}" class="btn btn-sm btn-success">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -65,9 +74,9 @@
                         </table>
 
                         <!-- Pagination Links -->
-                        <div class="mt-3">
-                            {{ $data->links() }}
-                        </div>
+                        {{-- <div class="mt-3">
+                            {{ $apiUsers->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </div>

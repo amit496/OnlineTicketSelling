@@ -6,3 +6,5 @@ use Illuminate\Support\Facades\Route;
 
 include('category.php');
 include('setting.php');
+include('ApiUsers\ApiUser.php');
+

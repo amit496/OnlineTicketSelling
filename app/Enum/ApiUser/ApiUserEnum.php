@@ -1,8 +1,17 @@
 <?php
 
-namespace  App\Enum\ApiUser;
+namespace App\Enum\ApiUser;
 
-enum ApiUserEnum: int{
+enum ApiUserEnum: int
+{
     case ACTIVE = 1;
     case INACTIVE = 0;
+
+    public function label(): string
+    {
+        return match($this) {
+            self::ACTIVE => 'Active',
+            self::INACTIVE => 'Inactive',
+        };
+    }
 }

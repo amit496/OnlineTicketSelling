@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enum\ApiUser\ApiUserEnum;
 
 return new class extends Migration
 {
@@ -13,13 +14,14 @@ return new class extends Migration
     {
         Schema::create('api_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->nullable()->default('text');
-            $table->string('email', 100)->nullable()->default('text');
-            $table->string('url', 100)->nullable()->default('text');
+            $table->string('uuid')->nullable();
+            $table->string('name', 100)->nullable();
+            $table->string('email', 100)->unique();
+            $table->string('url', 100)->nullable();
 
-            $table->tinyInteger('numbers')->nullable()->default(0); 
+            $table->tinyInteger('status')->nullable()->default(ApiUserEnum::ACTIVE->value);
+            $table->string('password')->nullable();
 
-            $table->string('status', 100)->nullable()->default('text');
             $table->timestamps();
         });
     }
